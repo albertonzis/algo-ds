@@ -27,4 +27,9 @@ public class QuickFindUF implements UnionFind {
     public String getName() {
         return this.getClass().getSimpleName();
     }
+
+    @Override
+    public int find(int i) {
+        return 0;
+    }
 }
