@@ -1,13 +1,15 @@
 package week1.unionfind;
 
-public class QuickUnionWeightedUF implements UnionFind {
+public class WeightedQuickUnionUF implements UnionFind {
 
     private int[] id;
     private int[] sz;
+    private int[] gt;
 
-    public QuickUnionWeightedUF(int n) {
+    public WeightedQuickUnionUF(int n) {
         id = new int[n];
         sz = new int[n];
+        gt = new int[n];
         for (int i = 0; i < n; i++) {
             id[i] = i;
             sz[i] = 1;
@@ -15,15 +17,24 @@ public class QuickUnionWeightedUF implements UnionFind {
     }
 
     private int root(int i) {
+        int element = i;
         while (i != id[i]) {
             id[i] = id[id[i]];
             i = id[i];
         }
+
+        if (gt[i] < element)
+            gt[i] = element;
+
         return i;
     }
 
     public boolean connected(int p, int q) {
         return root(p) == root(q);
+    }
+    
+    public int find(int i){
+        return gt[root(i)];
     }
 
     public void union(int p, int q) {
